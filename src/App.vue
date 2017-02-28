@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--在绑定 prop 时，prop 必须在子组件中声明-->
     <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">

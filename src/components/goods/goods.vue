@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="goods">
+      <!--ref 被用来给元素或子组件注册引用信息。引用信息会根据父组件的 $refs 对象进行注册。-->
+      <!--如果在普通的DOM元素上使用，引用信息就是元素; 如果用在子组件上，引用信息就是组件实例-->
       <div class="menu-wrapper" ref="menuWrapper">
         <ul>
           <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex===index}"
@@ -39,6 +41,7 @@
           </li>
         </ul>
       </div>
+      <!--selectFoods,deliveryPrice,minPrice向子组件传递数据-->
       <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
                 :minPrice="seller.minPrice"></shopcart>
     </div>
@@ -98,6 +101,10 @@
         response = response.body;
         if (response.errno === ERR_OK) {
           this.goods = response.data;
+          // 当数据更新时，DOM并不会立即重新渲染
+          // Vue将开启一个队列，缓冲在同一事件循环中发生的所有数据改变
+          // 在下一个的事件循环“tick”中，Vue 刷新队列并执行实际（已去重的）工作
+          // $nextTick()方法将回调延迟到下次 DOM 更新循环之后执行
           this.$nextTick(() => {
             this._initScroll();
             this._calculateHeight();

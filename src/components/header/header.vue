@@ -71,6 +71,7 @@
 
   export default {
     props: {
+      // props中定义的属性seller必须与从v-header标签中定义的属性名seller保持一致
       seller: {
         type: Object
       }
