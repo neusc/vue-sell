@@ -47,6 +47,7 @@
                 :minPrice="seller.minPrice"></shopcart>
     </div>
     <!--为组件绑定自定义事件-->
+    <!--addFood方法传递数据的途径为goods->food>cartcontrol-->
     <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 </template>

@@ -66,14 +66,14 @@
         if (!event._constructed) {
           return;
         }
-        // 触发父组件上绑定的select方法
+        // 触发父组件上绑定的自定义select方法
         this.$emit('select', type);
       },
       toggleContent(event) {
         if (!event._constructed) {
           return;
         }
-        // 触发父组件上绑定的toggle方法
+        // 触发父组件上绑定的自定义toggle方法
         this.$emit('toggle');
       }
     }
