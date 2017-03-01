@@ -32,7 +32,7 @@
         }
         this.$emit('add', event.target);
       },
-      // 减少所选商品的数量3
+      // 减少所选商品的数量
       decreaseCart(event) {
         if (!event._constructed) {
           return;
