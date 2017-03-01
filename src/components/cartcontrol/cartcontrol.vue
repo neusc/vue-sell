@@ -20,6 +20,7 @@
       }
     },
     methods: {
+      // 增加所选商品的数量
       addCart(event) {
         if (!event._constructed) {
           return;
@@ -31,6 +32,7 @@
         }
         this.$emit('add', event.target);
       },
+      // 减少所选商品的数量3
       decreaseCart(event) {
         if (!event._constructed) {
           return;

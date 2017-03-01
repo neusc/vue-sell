@@ -18,6 +18,7 @@
             <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
           </div>
           <div class="cartcontrol-wrapper">
+            <!--为组件绑定自定义事件-->
             <cartcontrol @add="addFood" :food="food"></cartcontrol>
           </div>
           <transition name="fade">
@@ -34,6 +35,7 @@
         <split></split>
         <div class="rating">
           <h1 class="title">商品评价</h1>
+          <!--组件自定义事件用于在子组件和父组件之间传递数据-->
           <ratingselect @select="selectRating" @toggle="toggleContent" :selectType="selectType"
                         :onlyContent="onlyContent" :desc="desc"
                         :ratings="food.ratings"></ratingselect>
@@ -45,8 +47,10 @@
                   <span class="name">{{rating.username}}</span>
                   <img class="avatar" width="12" height="12" :src="rating.avatar">
                 </div>
+                <!--formatDate为过滤器-->
                 <div class="time">{{rating.rateTime | formatDate}}</div>
                 <p class="text">
+                  <!--vue中class与style绑定-->
                   <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"></span>{{rating.text}}
                 </p>
               </li>
@@ -88,6 +92,7 @@
       };
     },
     methods: {
+      // goods组件中用于显示food组件调用
       show() {
         this.showFlag = true;
         this.selectType = ALL;
@@ -105,6 +110,7 @@
       hide() {
         this.showFlag = false;
       },
+      // 加入购物车button
       addFirst(event) {
         if (!event._constructed) {
           return;
@@ -112,6 +118,8 @@
         this.$emit('add', event.target);
         Vue.set(this.food, 'count', 1);
       },
+      // 根据ratingselect组件中选择的评论类型
+      // 过滤当前所有评论，只显示对应类型的评论
       needShow(type, text) {
         if (this.onlyContent && !text) {
           return false;
@@ -122,15 +130,18 @@
           return type === this.selectType;
         }
       },
+      // cartcontrol组件增加商品数量
       addFood(target) {
         this.$emit('add', target);
       },
+      // 选择评论类型
       selectRating(type) {
         this.selectType = type;
         this.$nextTick(() => {
           this.scroll.refresh();
         });
       },
+      // 是否勾选只看有内容的评价
       toggleContent() {
         this.onlyContent = !this.onlyContent;
         this.$nextTick(() => {
@@ -139,6 +150,7 @@
       }
     },
     filters: {
+      // 转换日期格式
       formatDate(time) {
         let date = new Date(time);
         return formatDate(date, 'yyyy-MM-dd hh:mm');

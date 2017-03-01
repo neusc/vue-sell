@@ -35,11 +35,13 @@
           </div>
           <div class="list-content" ref="listContent">
             <ul>
+              <!--父组件传入的数据selecctFoods-->
               <li class="food" v-for="food in selectFoods">
                 <span class="name">{{food.name}}</span>
                 <div class="price">
                   <span>￥{{food.price*food.count}}</span>
                 </div>
+                <!--购物车组件中包含增减数量cartcontrol组件-->
                 <div class="cartcontrol-wrapper">
                   <cartcontrol @add="addFood" :food="food"></cartcontrol>
                 </div>
@@ -49,6 +51,7 @@
         </div>
       </transition>
     </div>
+    <!--底部购物车栏展开时显示的蒙层-->
     <transition name="fade">
       <div class="list-mask" @click="hideList" v-show="listShow"></div>
     </transition>
@@ -101,10 +104,12 @@
           }
         ],
         dropBalls: [],
+        // 默认购物车是折叠状态
         fold: true
       };
     },
     computed: {
+      // 购物车所选商品总价格
       totalPrice() {
         let total = 0;
         this.selectFoods.forEach((food) => {
@@ -112,6 +117,7 @@
         });
         return total;
       },
+      // 购物车所选商品总数量
       totalCount() {
         let count = 0;
         this.selectFoods.forEach((food) => {
@@ -119,6 +125,7 @@
         });
         return count;
       },
+      // 结算按钮文案
       payDesc() {
         if (this.totalPrice === 0) {
           return `￥${this.minPrice}元起送`;
@@ -129,6 +136,7 @@
           return '去结算';
         }
       },
+      // 结算按钮绑定不同的class
       payClass() {
         if (this.totalPrice < this.minPrice) {
           return 'not-enough';
@@ -136,6 +144,7 @@
           return 'enough';
         }
       },
+      // 根据购物车的折叠状态判断蒙层和购物车列表是否显示
       listShow() {
         if (!this.totalCount) {
           this.fold = true;
@@ -188,9 +197,11 @@
         }
         window.alert(`支付${this.totalPrice}元`);
       },
+      // 购物车组件中包含增减数量cartcontrol组件
       addFood(target) {
         this.drop(target);
       },
+      // 小球下落之前的状态
       beforeDrop(el) {
         let count = this.balls.length;
         while (count--) {
@@ -208,6 +219,7 @@
           }
         }
       },
+      // 小球下落过程中的变化状态
       dropping(el, done) {
         /* eslint-disable no-unused-vars */
         let rf = el.offsetHeight;
@@ -220,6 +232,7 @@
           el.addEventListener('transitionend', done);
         });
       },
+      // 小球下落结束之后的状态
       afterDrop(el) {
         let ball = this.dropBalls.shift();
         if (ball) {

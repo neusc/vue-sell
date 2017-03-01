@@ -48,11 +48,13 @@
       }
     },
     computed: {
+      // 过滤显示积极评价
       positives() {
         return this.ratings.filter((rating) => {
           return rating.rateType === POSITIVE;
         });
       },
+      // 过滤显示消极评价
       negatives() {
         return this.ratings.filter((rating) => {
           return rating.rateType === NEGATIVE;
@@ -64,12 +66,14 @@
         if (!event._constructed) {
           return;
         }
+        // 触发父组件上绑定的select方法
         this.$emit('select', type);
       },
       toggleContent(event) {
         if (!event._constructed) {
           return;
         }
+        // 触发父组件上绑定的toggle方法
         this.$emit('toggle');
       }
     }

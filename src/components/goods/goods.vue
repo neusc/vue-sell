@@ -33,6 +33,7 @@
                                                                   v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
+                    <!--为组件绑定自定义事件-->
                     <cartcontrol @add="addFood" :food="food"></cartcontrol>
                   </div>
                 </div>
@@ -45,6 +46,7 @@
       <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
                 :minPrice="seller.minPrice"></shopcart>
     </div>
+    <!--为组件绑定自定义事件-->
     <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 </template>
@@ -130,6 +132,7 @@
           return;
         }
         this.selectedFood = food;
+        // food组件中定义的show方法
         this.$refs.food.show();
       },
       // 添加商品(cartcontrol组件)
