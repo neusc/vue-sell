@@ -72,6 +72,7 @@
       };
     },
     computed: {
+        // goods部分当前区块的索引值
       currentIndex() {
         for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i];
@@ -82,6 +83,7 @@
         }
         return 0;
       },
+      // 被添加到购物车的food，传递到shopcart组件
       selectFoods() {
         let foods = [];
         this.goods.forEach((good) => {
@@ -113,6 +115,7 @@
       });
     },
     methods: {
+        // 选择左侧菜单栏，右侧商品栏滚动至相应区块
       selectMenu(index, event) {
         if (!event._constructed) {
           return;
@@ -121,6 +124,7 @@
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
       },
+      // 点击商品展示对应商品的详情页
       selectFood(food, event) {
         if (!event._constructed) {
           return;
@@ -128,17 +132,20 @@
         this.selectedFood = food;
         this.$refs.food.show();
       },
+      // 添加商品(cartcontrol组件)
       addFood(target) {
         this._drop(target);
       },
+      // 添加商品执行小球下落动画
       _drop(target) {
         // 体验优化,异步执行下落动画
         this.$nextTick(() => {
           this.$refs.shopcart.drop(target);
         });
       },
+      // 商品组件滚动效果初始化
       _initScroll() {
-        this.meunScroll = new BScroll(this.$refs.menuWrapper, {
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
         });
 
@@ -151,6 +158,7 @@
           this.scrollY = Math.abs(Math.round(pos.y));
         });
       },
+      // 将商品组件右侧各个区块的高度存入数组便于跳转至相应区块
       _calculateHeight() {
         let foodList = this.$refs.foodList;
         let height = 0;
