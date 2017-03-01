@@ -82,6 +82,7 @@
     },
     data() {
       return {
+        // 从localstorage中读取是否收藏
         favorite: (() => {
           return loadFromLocal(this.seller.id, 'favorite', false);
         })()
@@ -115,6 +116,7 @@
           return;
         }
         this.favorite = !this.favorite;
+        // 将收藏信息存储入localstorage
         saveToLocal(this.seller.id, 'favorite', this.favorite);
       },
       _initScroll() {
@@ -126,6 +128,7 @@
           this.scroll.refresh();
         }
       },
+      // 为一组图片添加水平滚动效果
       _initPics() {
         if (this.seller.pics) {
           let picWidth = 120;

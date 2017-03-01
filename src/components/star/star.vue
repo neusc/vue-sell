@@ -1,5 +1,6 @@
 <template>
   <div class="star" :class="starType">
+    <!--itemClass分别对应result数组中的'on','half'和'off'值，对应不同的星级-->
     <span v-for="(itemClass,index) in itemClasses" :class="itemClass" class="star-item" key="index"></span>
   </div>
 </template>
@@ -20,9 +21,11 @@
       }
     },
     computed: {
+      // 计算不同星级的显示大小
       starType() {
         return 'star-' + this.size;
       },
+      // 将评分score转化为星级显示
       itemClasses() {
         let result = [];
         let score = Math.floor(this.score * 2) / 2;
