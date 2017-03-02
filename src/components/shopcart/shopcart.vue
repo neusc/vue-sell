@@ -20,6 +20,7 @@
       </div>
       <div class="ball-container">
         <div v-for="ball in balls">
+          <!--javascript钩子函数-->
           <transition name="drop" @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
             <div class="ball" v-show="ball.show">
               <div class="inner inner-hook"></div>
@@ -145,6 +146,8 @@
         }
       },
       // 根据购物车的折叠状态判断蒙层和购物车列表是否显示
+      // 计算属性listShow依赖totalCount
+      // 当totalCount=0时会自动更新值
       listShow() {
         if (!this.totalCount) {
           this.fold = true;
