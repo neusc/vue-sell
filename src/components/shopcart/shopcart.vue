@@ -56,12 +56,14 @@
     <transition name="fade">
       <div class="list-mask" @click="hideList" v-show="listShow"></div>
     </transition>
+    <pay :totalPrice="totalPrice" ref="pay"></pay>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
+  import pay from 'components/pay/pay';
 
   export default {
     props: {
@@ -198,7 +200,7 @@
         if (this.totalPrice < this.minPrice) {
           return;
         }
-        window.alert(`支付${this.totalPrice}元`);
+        this.$refs.pay.show();
       },
       // 购物车组件中包含增减数量cartcontrol组件
       addFood(target) {
@@ -245,7 +247,8 @@
       }
     },
     components: {
-      cartcontrol
+      cartcontrol,
+      pay
     }
   };
 </script>
