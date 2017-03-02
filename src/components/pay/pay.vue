@@ -19,9 +19,9 @@
       };
     },
     methods: {
-        show() {
-            this.showFlag = true;
-        }
+      show() {
+        this.showFlag = true;
+      }
     }
   };
 </script>
@@ -37,9 +37,9 @@
     width: 100%
     height: 100%
     background: #fff
-    transform: translate3d(0,0,0)
+    transform: translate3d(0, 0, 0)
     &.move-enter-active, &.move-leave-active
       transition: all 0.2s liner
     &.move-enter, &.move-leave-enter
-      transform: translate3d(100%,0,0)
+      transform: translate3d(100%, 0, 0)
 </style>
